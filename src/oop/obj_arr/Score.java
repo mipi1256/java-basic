@@ -14,8 +14,8 @@ public class Score {
       */
 
    private String name;
-   private int korean;
-   private int english;
+   private int kor;
+   private int eng;
    private int math;
    private int total;
    private double average;
@@ -28,20 +28,20 @@ public class Score {
       this.name = name;
    }
 
-   public int getKorean() {
-      return korean;
+   public int getKor() {
+      return kor;
    }
 
-   public void setKorean(int korean) {
-      this.korean = korean;
+   public void setKor(int kor) {
+      this.kor = kor;
    }
 
-   public int getEnglish() {
-      return english;
+   public int getEng() {
+      return eng;
    }
 
-   public void setEnglish(int english) {
-      this.english = english;
+   public void setEng(int eng) {
+      this.eng = eng;
    }
 
    public int getMath() {
@@ -56,29 +56,77 @@ public class Score {
       return total;
    }
 
-   public void setTotal(int total) {
-      total = korean + english + math;
-      this.total = total;
+   /*
+   public void setTotal() {
+      // 이미 kor, eng, math가 세팅이 완료되었다고 가정.
+      this.total = this.kor + this.eng + this.math;
    }
+    */
 
-   public double getAverage(int korean, int english, int math) {
-      average = (double) (korean + english + math) /3.0;
+   public double getAverage() {
       return average;
    }
 
-   public void setAverage(double average) {
-      this.average = average;
+   /*
+   public void setAverage() {
+      this.average = this.total / 3.0;
    }
 
-   void scoreInfo() {
-      System.out.printf("이름: $s\n국어 점수: %d\n영어 점수: %d\n수학 점수: %d\n총점수: %d\n평균 점수: %d", name, korean, english, math, total, average);
-      System.out.println("-----------------------------------------------");
+   */
+
+   //총점 과 평균을 한번에 계산해서 세팅이 하는 메서드
+   public void setTotalAndAvg () {
+      this.total = this.kor + this.eng + this.math;
+      this.average = this.total / 3.0;
    }
 
-   Score(String name, int korean, int english, int math) {
-      this.name = name;
-      this.korean = korean;
-      this.english = english;
-      this.math = math;
+   /*
+            public int getTotal() {
+               return total;
+            }
+
+            public void setTotal(int total) {
+               total = kor + engl + math;
+               this.total = total;
+            }
+
+            public double getAverage() {
+               return average;
+            }
+
+            public void setAverage(double average) {
+               this.average = average;
+            }
+            */
+   public void scoreInfo() {
+      System.out.printf("이름: %s  국어: %d점  영어: %d점  수학: %d점\n총점수: %d  평균 점수: %.2f점"
+            , name, kor, eng, math, total, average);
    }
+
+   // 점수 유효성 검증
+   public boolean isValidateScore(int score) {
+      if(score > 100 || score < 1) {
+         System.out.println("우효하지 않은 점수입니다. (0~100)");
+         return false;
+      }
+      return true;
+   }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

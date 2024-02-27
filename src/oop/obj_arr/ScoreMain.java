@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class ScoreMain {
 
    public static void main(String[] args) {
+
       /*
          - Score 객체를 담을 수 있는 배열을 선언하세요.
          배열의 크기는 넉넉하게 100개로 하겠습니다.
@@ -22,25 +23,81 @@ public class ScoreMain {
          모두 null로 가득 차 있습니다. (null.scoreInfo() -> 에러)
       */
 
+      Score[] scoreList = new Score[100];
       Scanner sc = new Scanner(System.in);
-      Score[] studentArr = new Score[100];
 
-      for (int i = 0; i < studentArr.length; i++) {
-         System.out.print("이름: ");
+      System.out.println("*** 학생 점수 입력 프로그램 ***");
+      System.out.println("#이름 입력창에 '그만'을 입력하시면 종료됩니다.");
+      int idx = 0;
+
+      //while (scoreList[scoreList.length - 1] == null) {
+      while(idx != scoreList.length){
+
+         System.out.print("# 이름: ");
          String name = sc.next();
-         System.out.print("국어 점수: ");
-         int korean = sc.nextInt();
-         System.out.print("영어 점수: ");
-         int english = sc.nextInt();
-         System.out.print("수학 점수: ");
+         if (name.equals("그만")) {
+            System.out.println("입력을 종료합니다.");
+            break;
+         }
+
+         Score s = new Score();
+
+         System.out.print("# 국어: ");
+         int kor = sc.nextInt();
+         if (!s.isValidateScore(kor)) {
+            continue;
+         }
+
+         System.out.print("# 영어: ");
+         int eng = sc.nextInt();
+         if (!s.isValidateScore(eng)) {
+            continue;
+         }
+
+         System.out.print("# 수학: ");
          int math = sc.nextInt();
+         if (!s.isValidateScore(math)) {
+            continue;
+         }
 
-         studentArr[i] = new Score(name, korean, english, math);
-      }
+         s.setName(name);
+         s.setKor(kor);
+         s.setEng(eng);
+         s.setMath(math);
+         s.setTotalAndAvg();
 
-      for (Score score : studentArr) {
+         scoreList[idx] = s;
+         idx++;
+
+         System.out.println("*** 학생 정보 입력 완료 ***\n");
+      } // 입력 반복문 끝
+
+      for (Score score : scoreList) {
+         if(score == null) break;
          score.scoreInfo();
+         System.out.println("------------------------------------");
       }
+
+      sc.close();
+
+
 
    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
