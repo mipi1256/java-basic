@@ -8,4 +8,9 @@ public class Tesla extends Car{
 
    }
 
+   public void activeAutopilot() {
+      System.out.println("테슬라의 오토파일럿을 가동합니다.");
+
+   }
+
 }
